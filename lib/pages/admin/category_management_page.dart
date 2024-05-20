@@ -52,7 +52,7 @@ class _CategoryManagementPageState extends State<CategoryManagementPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Ada produk baru?",
+                        "Kreasikan Kuemu!!?",
                         style: TextStyle(
                             fontFamily: "Urbanist",
                             fontWeight: FontWeight.w600,

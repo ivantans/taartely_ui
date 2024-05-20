@@ -129,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   onPressed: () {
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-                    return AdminHomePage();
+                    return HomePage();
                   }));
                   },
                 ),

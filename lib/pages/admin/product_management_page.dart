@@ -205,7 +205,7 @@ class _ProductManagementPageState extends State<ProductManagementPage> {
           required String review,
           required String description}) =>
       Container(
-        height: 350,
+        height: 330,
         width: 180,
         decoration: BoxDecoration(
             border: Border.all(color: Color.fromRGBO(255, 0, 0, 0)),
@@ -217,7 +217,7 @@ class _ProductManagementPageState extends State<ProductManagementPage> {
                 child: Image.asset(
                   image,
                   fit: BoxFit.fill,
-                  height: 220,
+                  height: 190,
                   width: 180,
                 )),
             Container(

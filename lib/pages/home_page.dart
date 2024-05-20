@@ -46,10 +46,10 @@ class _HomePageState extends State<HomePage> {
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.grey,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: "Beranda"),
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_bag_outlined), label: "Keranjang"),
-          BottomNavigationBarItem(icon: Icon(Icons.sticky_note_2_outlined), label: "Pesanan"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profil"),
+          BottomNavigationBarItem(icon: Icon(Icons.home_filled, size: 30,), label: "Beranda"),
+          BottomNavigationBarItem(icon: Icon(Icons.shopping_bag_outlined, size: 30,), label: "Keranjang"),
+          BottomNavigationBarItem(icon: Icon(Icons.sticky_note_2_outlined, size: 30,), label: "Pesanan"),
+          BottomNavigationBarItem(icon: Icon(Icons.person, size: 30,), label: "Profil"),
         ],
       ),
     ));
