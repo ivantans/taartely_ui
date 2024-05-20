@@ -15,17 +15,21 @@ class _TigaPageState extends State<TigaPage> {
       body: ListView(
         padding: EdgeInsets.only(bottom: 20, left: 20, right: 20),
         children: [
-          Container(
-            margin: EdgeInsets.only(bottom: 20),
-            child: Row(
+          SizedBox(
+            height: 50, // Atur tinggi sesuai kebutuhan
+            child: ListView(
+              scrollDirection: Axis.horizontal,
               children: [
                 _buildProductCategory(index: 0, name: "Semua"),
                 _buildProductCategory(index: 1, name: "Menunggu"),
                 _buildProductCategory(index: 2, name: "Belum Bayar"),
                 _buildProductCategory(index: 3, name: "Proses"),
+                _buildProductCategory(index: 3, name: "Selesai"),
+                _buildProductCategory(index: 3, name: "Dibatalkan"),
               ],
             ),
           ),
+          SizedBox(height: 24,),
           OrderItem(
             status: 'Menunggu',
             products: [
@@ -145,7 +149,6 @@ class OrderItem extends StatelessWidget {
               Text(totalPrice,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               Align(
-                alignment: Alignment.centerRight,
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
@@ -162,24 +165,6 @@ class OrderItem extends StatelessWidget {
                   ),
                 ),
               ),
-              (buttonLabel == "Bayar")?Align(
-                alignment: Alignment.centerRight,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 12.0, vertical: 12.0),
-                    child: Text("Batalkan",
-                        style: TextStyle(fontSize: 12, color: Colors.white)),
-                  ),
-                ),
-              ):Row(),
             ],
           ),
         ],

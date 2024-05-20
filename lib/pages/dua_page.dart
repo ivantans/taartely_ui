@@ -15,7 +15,7 @@ class _DuaPageState extends State<DuaPage> {
       body: Stack(
         children: [
           ListView(
-            padding: EdgeInsets.all(16.0),
+            padding: EdgeInsets.only(left: 32, right: 32, top: 20),
             children: [
               ProductItem(
                 image: 'images/cup.jpg',
@@ -157,8 +157,8 @@ class ProductItem extends StatelessWidget {
                 Text(
                   name,
                   style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
                     fontFamily: "Urbanist",
                   ),
                 ),
@@ -261,14 +261,6 @@ class _CounterWidgetState extends State<CounterWidget> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 5.0,
-            spreadRadius: 1.0,
-            offset: Offset(0, 3),
-          ),
-        ],
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -289,7 +281,7 @@ class _CounterWidgetState extends State<CounterWidget> {
                 horizontal: 10.0), // Mengurangi padding di sekitar teks
             child: Text(
               '$_counter',
-              style: TextStyle(fontSize: 12), // Mengurangi ukuran teks
+              style: TextStyle(fontSize: 14), // Mengurangi ukuran teks
             ),
           ),
           ElevatedButton(

@@ -217,7 +217,7 @@ class AllProductPage extends StatelessWidget {
           }));
         },
         child: Container(
-          height: 300,
+          height: 280,
           width: 180,
           decoration: BoxDecoration(
               border: Border.all(color: Color.fromRGBO(255, 0, 0, 0)),
@@ -229,7 +229,7 @@ class AllProductPage extends StatelessWidget {
                   child: Image.asset(
                     image,
                     fit: BoxFit.fill,
-                    height: 220,
+                    height: 190,
                     width: 180,
                   )),
               Container(

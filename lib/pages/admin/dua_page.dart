@@ -28,9 +28,10 @@ class _DuaPageState extends State<DuaPage> {
       body: ListView(
         padding: EdgeInsets.only(bottom: 20, left: 20, right: 20),
         children: [
-          Container(
-            margin: EdgeInsets.only(bottom: 20),
-            child: Row(
+          SizedBox(
+            height: 50, // Atur tinggi sesuai kebutuhan
+            child: ListView(
+              scrollDirection: Axis.horizontal,
               children: [
                 _buildProductCategory(index: 0, name: "Semua"),
                 _buildProductCategory(index: 1, name: "Menunggu"),
@@ -39,6 +40,7 @@ class _DuaPageState extends State<DuaPage> {
               ],
             ),
           ),
+          SizedBox(height: 24,),
           OrderItem(
             status: 'Menunggu',
             products: [
@@ -83,6 +85,7 @@ class _DuaPageState extends State<DuaPage> {
       ),
     );
   }
+
   _buildProductCategory({required int index, required String name}) =>
       Container(
         width: 100,
@@ -108,7 +111,6 @@ class _DuaPageState extends State<DuaPage> {
       );
 }
 
-
 class OrderItem extends StatelessWidget {
   final String status;
   final List<ProductItem> products;
@@ -125,7 +127,7 @@ class OrderItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context){
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
           return DetailOrderPage();
         }));
       },
@@ -154,7 +156,8 @@ class OrderItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(totalPrice,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 Align(
                   alignment: Alignment.centerRight,
                   child: ElevatedButton(
@@ -199,7 +202,6 @@ class OrderItem extends StatelessWidget {
     );
   }
 }
-
 
 class ProductItem extends StatelessWidget {
   final String image;

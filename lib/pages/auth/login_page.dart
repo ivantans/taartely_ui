@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:taartely_ui/pages/admin/admin_home_page.dart';
 import 'package:taartely_ui/pages/auth/register_page.dart';
 import 'package:taartely_ui/pages/home_page.dart';
+
+import '../admin/admin_home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -11,6 +12,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _username = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -46,6 +48,7 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 margin: EdgeInsets.only(left: 34, right: 34, top: 42),
                 child: TextField(
+                  controller: _username,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -128,14 +131,24 @@ class _LoginPageState extends State<LoginPage> {
                         color: const Color.fromARGB(255, 255, 255, 255)),
                   ),
                   onPressed: () {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-                    return HomePage();
-                  }));
+                    if (_username.text == "Taartely") {
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) {
+                        return AdminHomePage();
+                      }));
+                    } else{
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) {
+                        return HomePage();
+                      }));
+                    }
                   },
                 ),
-              ), GestureDetector(
-                onTap: (){
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) {
                     return RegisterPage();
                   }));
                 },
