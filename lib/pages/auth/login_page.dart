@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taartely_ui/pages/admin/admin_home_page.dart';
 import 'package:taartely_ui/pages/auth/register_page.dart';
 import 'package:taartely_ui/pages/home_page.dart';
 
@@ -128,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   onPressed: () {
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-                    return HomePage();
+                    return AdminHomePage();
                   }));
                   },
                 ),
