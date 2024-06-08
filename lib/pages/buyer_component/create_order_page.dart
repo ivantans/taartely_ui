@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:taartely_ui/pages/home_page.dart';
-import 'package:taartely_ui/pages/tiga_page.dart';
+import 'package:taartely_ui/pages/navbar/buyer/buyer_navbar.dart';
 
 class CreateOrderPage extends StatefulWidget {
   const CreateOrderPage({super.key});

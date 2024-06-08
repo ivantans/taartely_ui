@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:taartely_ui/pages/auth/login_page.dart';
 import 'package:taartely_ui/pages/auth/register_page.dart';
+import 'package:taartely_ui/pages/navbar/buyer/buyer_navbar.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -99,6 +100,11 @@ class WelcomePage extends StatelessWidget {
                 ),
               ),
               GestureDetector(
+                onTap: (){
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+                    return HomePage();
+                  }));
+                },
                 child: Container(
                   padding: EdgeInsets.only(top: 75),
                   child: Text(

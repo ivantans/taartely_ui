@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:taartely_ui/pages/all_product_page.dart';
-import 'package:taartely_ui/pages/product_detail_page.dart';
+import 'package:taartely_ui/pages/buyer_component/product/all_product_page.dart';
+import 'package:taartely_ui/pages/buyer_component/product/product_detail_page.dart';
 
 class SatuPage extends StatefulWidget {
   const SatuPage({super.key});
@@ -206,15 +204,7 @@ class _SatuPageState extends State<SatuPage> {
           required String description}) =>
       GestureDetector(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return DetailProductPage(
-              image: image,
-              name: name,
-              rating: rating,
-              price: price,
-              description: description,
-            );
-          }));
+          
         },
         child: Container(
           height: 280,

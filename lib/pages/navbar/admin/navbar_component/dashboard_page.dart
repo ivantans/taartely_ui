@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:taartely_ui/pages/admin/category_management_page.dart';
-import 'package:taartely_ui/pages/admin/product_management_page.dart';
+import 'package:taartely_ui/pages/admin_component/category_management_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:taartely_ui/pages/admin_component/product_management_page.dart';
 
 class SatuPage extends StatefulWidget {
   const SatuPage({super.key});
@@ -12,7 +11,22 @@ class SatuPage extends StatefulWidget {
 }
 
 class _SatuPageState extends State<SatuPage> {
+  String? _token;
+
   @override
+  @override
+  void initState() {
+    super.initState();
+    _loadToken();
+  }
+
+  Future<void> _loadToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _token = prefs.getString('token');
+    });
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -30,6 +44,9 @@ class _SatuPageState extends State<SatuPage> {
       body: ListView(
         padding: EdgeInsets.only(left: 32, right: 32),
         children: [
+          Container(
+            child: _token == null?CircularProgressIndicator():Text(_token!),
+          ),
           SizedBox(
             height: 20,
           ),
@@ -166,7 +183,7 @@ class _SatuPageState extends State<SatuPage> {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context){
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return ProductManagementPage();
               }));
             },
@@ -190,15 +207,18 @@ class _SatuPageState extends State<SatuPage> {
                   ),
                 ),
                 decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black),
-                    borderRadius: BorderRadius.circular(20),),
+                  border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.circular(20),
+                ),
               ),
             ),
           ),
-          SizedBox(height: 30,),
+          SizedBox(
+            height: 30,
+          ),
           GestureDetector(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context){
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return CategoryManagementPage();
               }));
             },
@@ -222,8 +242,9 @@ class _SatuPageState extends State<SatuPage> {
                   ),
                 ),
                 decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black),
-                    borderRadius: BorderRadius.circular(20),),
+                  border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.circular(20),
+                ),
               ),
             ),
           ),

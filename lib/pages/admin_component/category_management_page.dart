@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:taartely_ui/pages/admin/add_category_page.dart';
-import 'package:taartely_ui/pages/admin/edit_category_page.dart';
+import 'package:taartely_ui/pages/admin_component/add_category_page.dart';
+import 'package:taartely_ui/pages/admin_component/edit_category_page.dart';
 
 class CategoryManagementPage extends StatefulWidget {
   const CategoryManagementPage({super.key});
@@ -39,7 +39,7 @@ class _CategoryManagementPageState extends State<CategoryManagementPage> {
           ),
         ),
         body: ListView(
-          padding: EdgeInsets.only(left: 32, right: 32),
+          padding: EdgeInsets.only(left: 32, right: 32, top:32),
           children: [
             Container(
               padding: EdgeInsets.all(22),

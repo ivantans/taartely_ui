@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:taartely_ui/pages/dua_page.dart';
-import 'package:taartely_ui/pages/empat_page.dart';
-import 'package:taartely_ui/pages/satu_page.dart';
-import 'package:taartely_ui/pages/tiga_page.dart';
+import 'package:taartely_ui/pages/navbar/buyer/navbar_component/cart_page.dart';
+import 'package:taartely_ui/pages/navbar/buyer/navbar_component/profile_page.dart';
+import 'package:taartely_ui/pages/navbar/buyer/navbar_component/dashboard_page.dart';
+import 'package:taartely_ui/pages/navbar/buyer/navbar_component/order_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

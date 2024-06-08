@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:taartely_ui/pages/admin/dua_page.dart';
-import 'package:taartely_ui/pages/admin/satu_page.dart';
-import 'package:taartely_ui/pages/admin/tiga_page.dart';
+import 'package:taartely_ui/pages/navbar/admin/navbar_component/order_management_page.dart';
+import 'package:taartely_ui/pages/navbar/admin/navbar_component/dashboard_page.dart';
+import 'package:taartely_ui/pages/navbar/admin/navbar_component/profile_page.dart';
 
 class AdminHomePage extends StatefulWidget {
   const AdminHomePage({super.key});

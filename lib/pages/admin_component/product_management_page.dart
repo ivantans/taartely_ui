@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:taartely_ui/pages/admin/add_product_page.dart';
-import 'package:taartely_ui/pages/admin/detail_product_page.dart';
+import 'package:taartely_ui/pages/admin_component/product/add_product_page.dart';
+import 'package:taartely_ui/pages/admin_component/detail_product_page.dart';
 
 class ProductManagementPage extends StatefulWidget {
   const ProductManagementPage({super.key});
