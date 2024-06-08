@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:taartely_ui/pages/admin_component/category_management_page.dart';
+import 'package:taartely_ui/pages/admin_component/category/category_management_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taartely_ui/pages/admin_component/product_management_page.dart';
 

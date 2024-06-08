@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taartely_ui/model/cart.dart';
-import 'package:taartely_ui/pages/buyer_component/create_order_page.dart';
+import 'package:taartely_ui/pages/buyer_component/order/create_order_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class DuaPage extends StatefulWidget {

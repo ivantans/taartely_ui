@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class Cart {
   final bool success;
   final int id;
