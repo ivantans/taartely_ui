@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:taartely_ui/model/productDetail.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:taartely_ui/model/product_detail_model.dart';
 
 class DetailProductPage extends StatefulWidget {
   final int productId;
@@ -22,11 +22,9 @@ class _DetailProductPageState extends State<DetailProductPage> {
   Future<ProductDetail> fetchProduct() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
-    
 
     final response = await http.get(
-      Uri.parse(
-          "$baseUrl/products/${widget.productId}"),
+      Uri.parse("$baseUrl/products/${widget.productId}"),
       headers: {
         'Authorization': 'Bearer $token',
       },
@@ -153,17 +151,17 @@ class _DetailProductPageState extends State<DetailProductPage> {
                                   size: 14,
                                   color: Colors.amber,
                                 ),
-                                const Text(
-                                  '4.5', // This should come from the product data if available
-                                  style: TextStyle(
+                                Text(
+                                  '${product.averageRating}',
+                                  style: const TextStyle(
                                     fontFamily: "Urbanist",
                                     fontWeight: FontWeight.bold,
                                     fontSize: 14,
                                   ),
                                 ),
-                                const Text(
-                                  " (1045 Reviews)",
-                                  style: TextStyle(
+                                Text(
+                                  " (${product.reviewCount} Reviews)",
+                                  style: const TextStyle(
                                     fontFamily: "Urbanist",
                                     fontWeight: FontWeight.w400,
                                     fontSize: 14,
@@ -190,6 +188,19 @@ class _DetailProductPageState extends State<DetailProductPage> {
                             fontWeight: FontWeight.bold,
                             fontFamily: "Urbanist",
                             fontSize: 14,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding:
+                            const EdgeInsets.only(left: 32, right: 32, top: 10),
+                        child: Text(
+                          product.productComposition,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontFamily: "Urbanist",
+                            fontSize: 14,
+                            color: Color.fromRGBO(127, 127, 127, 1),
                           ),
                         ),
                       ),

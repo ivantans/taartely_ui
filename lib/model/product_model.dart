@@ -29,6 +29,26 @@ class ProductResponse {
   }
 }
 
+
+class Category {
+  final int id;
+  final String category;
+
+  Category({
+    required this.id,
+    required this.category,
+  });
+
+  factory Category.fromJson(Map<String, dynamic> json) {
+    return Category(
+      id: json['id'],
+      category: json['category'],
+    );
+  }
+}
+
+
+
 class Product {
   final int id;
   final String productName;
@@ -39,6 +59,8 @@ class Product {
   final String productDescription;
   final String productStatus;
   final String? images;
+  final double averageRating;
+  final int reviewCount;
 
   Product({
     required this.id,
@@ -50,6 +72,8 @@ class Product {
     required this.productDescription,
     required this.productStatus,
     this.images,
+    required this.averageRating, // Added rating
+    required this.reviewCount, // Added review count
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
@@ -63,6 +87,8 @@ class Product {
       productDescription: json['product_description'],
       productStatus: json['product_status'],
       images: json['images'],
+      averageRating: json['average_rating'].toDouble(), // Parse the rating
+      reviewCount: json['review_count'], // Parse the review count
     );
   }
 
@@ -77,6 +103,8 @@ class Product {
       'product_description': productDescription,
       'product_status': productStatus,
       'images': images,
+      'average_rating': averageRating, // Add rating to JSON
+      'review_count': reviewCount, // Add review count to JSON
     };
   }
 }

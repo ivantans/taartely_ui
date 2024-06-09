@@ -2,12 +2,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:taartely_ui/model/product.dart';
+import 'package:taartely_ui/model/product_model.dart';
 import 'product_detail_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class AllProductPage extends StatelessWidget {
   const AllProductPage({super.key});
-  
+
   Future<List<Product>> fetchProducts() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
@@ -21,8 +22,9 @@ class AllProductPage extends StatelessWidget {
     );
 
     if (response.statusCode == 200) {
-      List jsonResponse = json.decode(response.body)['data'];
-      return jsonResponse.map((product) => Product.fromJson(product)).toList();
+      var jsonResponse = json.decode(response.body);
+      ProductResponse productResponse = ProductResponse.fromJson(jsonResponse);
+      return productResponse.data;
     } else {
       throw Exception('Failed to load products');
     }
@@ -192,7 +194,8 @@ class ProductCard extends StatelessWidget {
                         color: Colors.amber,
                       ),
                       Text(
-                        '4.5', // This should come from the product data if available
+                        product.averageRating
+                            .toString(), // Use actual rating from API
                         style: const TextStyle(
                           fontFamily: "Urbanist",
                           fontWeight: FontWeight.bold,
@@ -200,7 +203,7 @@ class ProductCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        " (1034 Reviews)", // This should come from the product data if available
+                        " (${product.reviewCount} Reviews)", // Use actual review count from API
                         style: const TextStyle(
                           fontFamily: "Urbanist",
                           fontWeight: FontWeight.w400,

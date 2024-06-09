@@ -4,7 +4,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:taartely_ui/model/cart.dart';  // Import model Cart dan CartItem
-import 'package:intl/intl.dart';  // Import untuk pemformatan tanggal
+import 'package:intl/intl.dart';
+import 'package:taartely_ui/model/contact_model.dart';  // Import untuk pemformatan tanggal
 
 class CreateOrderPage extends StatefulWidget {
   const CreateOrderPage({super.key});
@@ -217,7 +218,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                       items: snapshot.data!.map((Contact contact) {
                         return DropdownMenuItem<int>(
                           value: contact.id,
-                          child: Text('${contact.userAddress} - ${contact.userPhoneNumber}'),
+                          child: Text('${contact.name} - ${contact.userAddress} - ${contact.userPhoneNumber}'),
                         );
                       }).toList(),
                       onChanged: (value) {
@@ -289,22 +290,3 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
   }
 }
 
-class Contact {
-  final int id;
-  final String userAddress;
-  final String userPhoneNumber;
-
-  Contact({
-    required this.id,
-    required this.userAddress,
-    required this.userPhoneNumber,
-  });
-
-  factory Contact.fromJson(Map<String, dynamic> json) {
-    return Contact(
-      id: json['id'],
-      userAddress: json['user_address'],
-      userPhoneNumber: json['user_phone_number'],
-    );
-  }
-}

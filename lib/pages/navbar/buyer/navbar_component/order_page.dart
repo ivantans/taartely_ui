@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taartely_ui/model/order.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:taartely_ui/pages/buyer_component/review/add_review.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TigaPage extends StatefulWidget {
@@ -83,7 +84,7 @@ class _TigaPageState extends State<TigaPage> {
                 return Center(child: Text('No orders found'));
               } else {
                 return Column(
-                  children: snapshot.data!.map((order) => OrderItem(order: order, onCancel: _cancelOrder)).toList(),
+                  children: snapshot.data!.map((order) => OrderItem(order: order, onCancel: _cancelOrder, onAddReview: _addReview)).toList(),
                 );
               }
             },
@@ -152,13 +153,21 @@ class _TigaPageState extends State<TigaPage> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Failed to cancel order')));
     }
   }
+
+  Future<void> _addReview(int orderId, List<int> productIds) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AddReviewPage(orderId: orderId, productIds: productIds)),
+    );
+  }
 }
 
 class OrderItem extends StatelessWidget {
   final Order order;
   final Function(int) onCancel;
+  final Function(int, List<int>) onAddReview;
 
-  const OrderItem({Key? key, required this.order, required this.onCancel}) : super(key: key);
+  const OrderItem({Key? key, required this.order, required this.onCancel, required this.onAddReview}) : super(key: key);
 
   void _launchURL(String url) async {
     final encodedUrl = Uri.encodeFull(url);
@@ -211,11 +220,14 @@ class OrderItem extends StatelessWidget {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               Align(
-                child: order.orderStatusName.toLowerCase() == 'accepted'
+                child: order.orderStatusName.toLowerCase() == 'completed'
                     ? ElevatedButton(
-                        onPressed: () => _launchURL(order.paymentLinkUrl),
+                        onPressed: () => onAddReview(
+                          order.id,
+                          order.orderDetails.map((detail) => detail.productId).toList(),
+                        ),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green,
+                          backgroundColor: Colors.blue,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(24),
                           ),
@@ -223,26 +235,48 @@ class OrderItem extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
                           child: Text(
-                            'Bayar',
+                            'Add Review',
                             style: TextStyle(fontSize: 12, color: Colors.white),
                           ),
                         ),
                       )
-                    : ElevatedButton(
-                        onPressed: () => onCancel(order.id),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(24),
+                    : Column(
+                        children: [
+                          order.orderStatusName.toLowerCase() == 'accepted'
+                              ? ElevatedButton(
+                                  onPressed: () => _launchURL(order.paymentLinkUrl),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.green,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(24),
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
+                                    child: Text(
+                                      'Bayar',
+                                      style: TextStyle(fontSize: 12, color: Colors.white),
+                                    ),
+                                  ),
+                                )
+                              : SizedBox.shrink(),
+                          ElevatedButton(
+                            onPressed: () => onCancel(order.id),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.red,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(24),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
+                              child: Text(
+                                'Batalkan',
+                                style: TextStyle(fontSize: 12, color: Colors.white),
+                              ),
+                            ),
                           ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
-                          child: Text(
-                            'Batalkan',
-                            style: TextStyle(fontSize: 12, color: Colors.white),
-                          ),
-                        ),
+                        ],
                       ),
               ),
             ],

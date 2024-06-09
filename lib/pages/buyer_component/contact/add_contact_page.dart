@@ -14,6 +14,7 @@ class AddContactPage extends StatefulWidget {
 class _AddContactPageState extends State<AddContactPage> {
   String baseUrl = dotenv.env["BASE_URL"] ?? "";
   final _formKey = GlobalKey<FormState>();
+  String _name = '';
   String _userAddress = '';
   String _userPhoneNumber = '';
 
@@ -30,6 +31,7 @@ class _AddContactPageState extends State<AddContactPage> {
           'Authorization': 'Bearer $token',
         },
         body: jsonEncode({
+          'name' : _name,
           'user_address': _userAddress,
           'user_phone_number': _userPhoneNumber,
         }),
@@ -85,6 +87,18 @@ class _AddContactPageState extends State<AddContactPage> {
           key: _formKey,
           child: ListView(
             children: [
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Nama penerima'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a Name';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _name = value!;
+                },
+              ),
               TextFormField(
                 decoration: InputDecoration(labelText: 'User Address'),
                 validator: (value) {

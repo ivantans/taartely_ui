@@ -9,6 +9,8 @@ class ProductDetail {
   final String productDescription;
   final String createdAt;
   final String? images;
+  final double averageRating;
+  final int reviewCount;
 
   ProductDetail({
     required this.id,
@@ -21,6 +23,8 @@ class ProductDetail {
     required this.productDescription,
     required this.createdAt,
     this.images,
+    required this.averageRating,
+    required this.reviewCount,
   });
 
   factory ProductDetail.fromJson(Map<String, dynamic> json) {
@@ -35,6 +39,8 @@ class ProductDetail {
       productDescription: json['product_description'],
       createdAt: json['created_at'],
       images: json['images'].isNotEmpty ? json['images'][0]['url'] : null,
+      averageRating: (json['average_rating'] ?? 0).toDouble(),
+      reviewCount: json['review_count'] ?? 0,
     );
   }
 }
