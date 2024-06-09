@@ -54,7 +54,7 @@ class _EmpatPageState extends State<EmpatPage> {
 
     final url = Uri.parse('$baseUrl/logout');
     try {
-      final response = await http.post(
+      final response = await http.delete(
         url,
         headers: {
           'Authorization': 'Bearer $token',

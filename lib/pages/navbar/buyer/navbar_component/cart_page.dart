@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taartely_ui/model/cart.dart';
 import 'package:taartely_ui/pages/buyer_component/order/create_order_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:intl/intl.dart';
 
 class DuaPage extends StatefulWidget {
   const DuaPage({super.key});
@@ -48,10 +49,10 @@ class _DuaPageState extends State<DuaPage> {
           _totalPrice = cartData.totalPrice.toDouble();
         });
       } else {
-        throw Exception('Failed to load cart');
+        _showError('Failed to load cart');
       }
     } catch (error) {
-      print('Error fetching cart: $error');
+      _showError('Error fetching cart: $error');
     } finally {
       setState(() {
         _isLoading = false;
@@ -79,10 +80,10 @@ class _DuaPageState extends State<DuaPage> {
       if (response.statusCode == 200) {
         _fetchCart();
       } else {
-        throw Exception('Failed to add item to cart');
+        _showError('Failed to add item to cart');
       }
     } catch (error) {
-      print('Error adding item to cart: $error');
+      _showError('Error adding item to cart: $error');
     }
   }
 
@@ -105,10 +106,10 @@ class _DuaPageState extends State<DuaPage> {
       if (response.statusCode == 200) {
         _fetchCart();
       } else {
-        throw Exception('Failed to update item quantity');
+        _showError('Failed to update item quantity');
       }
     } catch (error) {
-      print('Error updating item quantity: $error');
+      _showError('Error updating item quantity: $error');
     }
   }
 
@@ -127,11 +128,17 @@ class _DuaPageState extends State<DuaPage> {
       if (response.statusCode == 200) {
         _fetchCart();
       } else {
-        throw Exception('Failed to remove item from cart');
+        _showError('Failed to remove item from cart');
       }
     } catch (error) {
-      print('Error removing item from cart: $error');
+      _showError('Error removing item from cart: $error');
     }
+  }
+
+  void _showError(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
   }
 
   @override
@@ -147,7 +154,7 @@ class _DuaPageState extends State<DuaPage> {
                     return ProductItem(
                       image: item.productImage ?? '',
                       name: item.productName,
-                      rating: '4.5', // Set the rating manually
+                      rating: '4.5',
                       price: item.productPrice.toString(),
                       quantity: item.quantity,
                       onRemove: () => _removeItemFromCart(item.id.toString()),
@@ -177,7 +184,7 @@ class _DuaPageState extends State<DuaPage> {
                         ),
                       ),
                       Text(
-                        "Rp." + _totalPrice.toString() + ",-",
+                        "Rp." + NumberFormat.currency(locale: 'id', symbol: '').format(_totalPrice) + ",-",
                         style: TextStyle(
                           fontFamily: "Urbanist",
                           fontSize: 14,
@@ -238,7 +245,7 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final placeholderImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png'; // URL gambar placeholder
+    final placeholderImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png';
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
