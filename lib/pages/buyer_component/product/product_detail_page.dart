@@ -4,11 +4,11 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:taartely_ui/model/product_detail_model.dart';
+import 'package:taartely_ui/pages/buyer_component/review/review_page.dart';
 
 class DetailProductPage extends StatefulWidget {
   final int productId;
-  const DetailProductPage({Key? key, required this.productId})
-      : super(key: key);
+  const DetailProductPage({Key? key, required this.productId}) : super(key: key);
 
   @override
   _DetailProductPageState createState() => _DetailProductPageState();
@@ -75,13 +75,15 @@ class _DetailProductPageState extends State<DetailProductPage> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false, 
           title: Row(
             children: [
               Container(
                 margin: const EdgeInsets.only(left: 12, right: 12),
                 decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black),
-                    borderRadius: BorderRadius.circular(16)),
+                  border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.circular(16),
+                ),
                 child: IconButton(
                   icon: const Icon(Icons.arrow_back_ios_rounded),
                   onPressed: () => Navigator.pop(context),
@@ -94,7 +96,7 @@ class _DetailProductPageState extends State<DetailProductPage> {
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -115,21 +117,17 @@ class _DetailProductPageState extends State<DetailProductPage> {
                     children: [
                       Center(
                         child: Container(
-                          padding: const EdgeInsets.only(
-                              left: 32, right: 32, top: 32),
+                          padding: const EdgeInsets.only(left: 32, right: 32, top: 32),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: product.images != null
-                                ? Image.network(product.images!,
-                                    fit: BoxFit.cover)
-                                : Image.asset('images/cup.jpg',
-                                    fit: BoxFit.cover),
+                                ? Image.network(product.images!, fit: BoxFit.cover)
+                                : Image.asset('images/cup.jpg', fit: BoxFit.cover),
                           ),
                         ),
                       ),
                       Container(
-                        padding:
-                            const EdgeInsets.only(left: 32, right: 32, top: 12),
+                        padding: const EdgeInsets.only(left: 32, right: 32, top: 12),
                         child: Text(
                           product.productName,
                           style: const TextStyle(
@@ -144,31 +142,37 @@ class _DetailProductPageState extends State<DetailProductPage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: [
-                                const Icon(
-                                  Icons.star,
-                                  size: 14,
-                                  color: Colors.amber,
-                                ),
-                                Text(
-                                  '${product.averageRating}',
-                                  style: const TextStyle(
-                                    fontFamily: "Urbanist",
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ReviewPage(productId: widget.productId),
                                   ),
-                                ),
-                                Text(
-                                  " (${product.reviewCount} Reviews)",
-                                  style: const TextStyle(
-                                    fontFamily: "Urbanist",
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14,
-                                    color: Color.fromRGBO(183, 183, 183, 1),
+                                );
+                              },
+                              child: Row(
+                                children: [
+                                  const Icon(Icons.star, size: 14, color: Colors.amber),
+                                  Text(
+                                    '${product.averageRating}',
+                                    style: const TextStyle(
+                                      fontFamily: "Urbanist",
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                  Text(
+                                    " (${product.reviewCount} Reviews)",
+                                    style: const TextStyle(
+                                      fontFamily: "Urbanist",
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 14,
+                                      color: Color.fromRGBO(183, 183, 183, 1),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                             CounterWidget(
                               onQuantityChanged: (quantity) {
@@ -192,8 +196,7 @@ class _DetailProductPageState extends State<DetailProductPage> {
                         ),
                       ),
                       Container(
-                        padding:
-                            const EdgeInsets.only(left: 32, right: 32, top: 10),
+                        padding: const EdgeInsets.only(left: 32, right: 32, top: 10),
                         child: Text(
                           product.productComposition,
                           style: const TextStyle(
@@ -205,8 +208,7 @@ class _DetailProductPageState extends State<DetailProductPage> {
                         ),
                       ),
                       Container(
-                        padding:
-                            const EdgeInsets.only(left: 32, right: 32, top: 10),
+                        padding: const EdgeInsets.only(left: 32, right: 32, top: 10),
                         child: Text(
                           product.productDescription,
                           style: const TextStyle(
@@ -225,8 +227,7 @@ class _DetailProductPageState extends State<DetailProductPage> {
                     bottom: 0,
                     child: Container(
                       color: Colors.white,
-                      padding: const EdgeInsets.only(
-                          left: 32, right: 32, top: 20, bottom: 20),
+                      padding: const EdgeInsets.only(left: 32, right: 32, top: 20, bottom: 20),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -254,11 +255,6 @@ class _DetailProductPageState extends State<DetailProductPage> {
                           ElevatedButton(
                             onPressed: () async {
                               await addToCart(widget.productId, _quantity);
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                    content:
-                                        Text('Product berhasil ditambahkan')),
-                              );
                             },
                             child: const Text(
                               "Masukkan Keranjang",
@@ -271,8 +267,7 @@ class _DetailProductPageState extends State<DetailProductPage> {
                             ),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.black,
-                              padding: const EdgeInsets.only(
-                                  left: 50, right: 50, top: 20, bottom: 20),
+                              padding: const EdgeInsets.only(left: 50, right: 50, top: 20, bottom: 20),
                             ),
                           ),
                         ],
@@ -291,8 +286,7 @@ class _DetailProductPageState extends State<DetailProductPage> {
 
 class CounterWidget extends StatefulWidget {
   final Function(int) onQuantityChanged;
-  const CounterWidget({Key? key, required this.onQuantityChanged})
-      : super(key: key);
+  const CounterWidget({Key? key, required this.onQuantityChanged}) : super(key: key);
 
   @override
   State<CounterWidget> createState() => _CounterWidgetState();
@@ -309,12 +303,12 @@ class _CounterWidgetState extends State<CounterWidget> {
   }
 
   void _decrementCounter() {
-    setState(() {
-      if (_counter > 0) {
+    if (_counter > 1) {
+      setState(() {
         _counter--;
-      }
-    });
-    widget.onQuantityChanged(_counter);
+      });
+      widget.onQuantityChanged(_counter);
+    }
   }
 
   @override
@@ -344,12 +338,10 @@ class _CounterWidgetState extends State<CounterWidget> {
               padding: const EdgeInsets.all(5), // Text Color
               minimumSize: const Size(20, 20), // Ukuran minimal tombol
             ),
-            child: const Icon(Icons.remove,
-                color: Colors.black, size: 12), // Mengurangi ukuran ikon
+            child: const Icon(Icons.remove, color: Colors.black, size: 12), // Mengurangi ukuran ikon
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: 10.0), // Mengurangi padding di sekitar teks
+            padding: const EdgeInsets.symmetric(horizontal: 10.0), // Mengurangi padding di sekitar teks
             child: Text(
               '$_counter',
               style: const TextStyle(fontSize: 12), // Mengurangi ukuran teks

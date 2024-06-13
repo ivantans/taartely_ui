@@ -37,22 +37,20 @@ class ReviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false, 
           title: Row(
             children: [
               Container(
-                margin: const EdgeInsets.only(left: 12, right: 12),
+                margin: EdgeInsets.only(left: 12, right: 12),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black),
-                  borderRadius: BorderRadius.circular(16),
-                ),
+                    border: Border.all(color: Colors.black),
+                    borderRadius: BorderRadius.circular(16)),
                 child: IconButton(
-                  icon: const Icon(Icons.arrow_back_ios_rounded),
+                  icon: Icon(Icons.arrow_back_ios_rounded),
                   onPressed: () => Navigator.pop(context),
                 ),
               ),
-              const Text(
-                "Review product",
+              Text(
+                "Detail Pesanan",
                 style: TextStyle(
                   fontFamily: "Urbanist",
                   fontWeight: FontWeight.bold,
@@ -129,4 +127,3 @@ class ReviewPage extends StatelessWidget {
     );
   }
 }
-

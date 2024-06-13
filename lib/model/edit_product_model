@@ -1,0 +1,42 @@
+class ProductDetail {
+  final String productName;
+  final double productPrice;
+  final String productComposition;
+  final String productDescription;
+  final String productStatus;
+  final int categoryId;
+
+  ProductDetail({
+    required this.productName,
+    required this.productPrice,
+    required this.productComposition,
+    required this.productDescription,
+    required this.productStatus,
+    required this.categoryId,
+  });
+
+  factory ProductDetail.fromJson(Map<String, dynamic> json) {
+    return ProductDetail(
+      productName: json['product_name'] ?? '',
+      productPrice: (json['product_price'] as num?)?.toDouble() ?? 0.0,
+      productComposition: json['product_composition'] ?? '',
+      productDescription: json['product_description'] ?? '',
+      productStatus: json['product_status'] ?? '',
+      categoryId: json['product_category_id'] ?? 0,
+    );
+  }
+}
+// Model Category
+class Category {
+  final int id;
+  final String category;
+
+  Category({required this.id, required this.category});
+
+  factory Category.fromJson(Map<String, dynamic> json) {
+    return Category(
+      id: json['id'],
+      category: json['category'],
+    );
+  }
+}

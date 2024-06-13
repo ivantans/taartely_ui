@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:taartely_ui/model/add_product_model.dart';
 import 'package:taartely_ui/pages/admin_component/category/add_category_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:taartely_ui/pages/admin_component/category/edit_category_page.dart';
@@ -266,16 +267,3 @@ class _CategoryManagementPageState extends State<CategoryManagementPage> {
   }
 }
 
-class Category {
-  final int id;
-  final String name;
-
-  Category({required this.id, required this.name});
-
-  factory Category.fromJson(Map<String, dynamic> json) {
-    return Category(
-      id: json['id'],
-      name: json['category'],
-    );
-  }
-}
